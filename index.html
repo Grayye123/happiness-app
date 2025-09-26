@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日份快乐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        .window-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #333;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-happy {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .btn-angry {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+        }
+
+        .btn-close {
+            background: #95a5a6;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 300px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #95a5a6;
+            cursor: pointer;
+        }
+
+        .heart {
+            color: #ff6b6b;
+            font-size: 24px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 主窗口 -->
+    <div class="container" id="mainWindow">
+        <button class="close-btn" onclick="handleClose()">×</button>
+        <div class="window-title">今日份快乐</div>
+
+        <div class="message">
+            <span class="heart">❤</span>
+            dear，今天你快乐了嘛？
+            <span class="heart">❤</span>
+        </div>
+
+        <div class="options">
+            <button class="btn btn-happy" onclick="handleHappy()">我太高兴了</button>
+            <button class="btn btn-angry" onclick="handleAngry()">去你的</button>
+        </div>
+    </div>
+
+    <!-- 关闭提示弹窗 -->
+    <div class="popup" id="closePopup">
+        <div class="popup-content">
+            <div class="message">不准逃避！</div>
+            <button class="btn btn-close" onclick="restart()">返回</button>
+        </div>
+    </div>
+
+    <script>
+        // 处理关闭按钮
+        function handleClose() {
+            document.getElementById('closePopup').style.display = 'flex';
+        }
+
+        // 处理快乐选项
+        function handleHappy() {
+            alert('祝你每天都开心！');
+            // 显示结束画面
+            document.body.innerHTML = `
+                <div class="container">
+                    <div class="message" style="font-size: 20px; color: #4ecdc4;">
+                        ❤ 愿你今天有个好心情！ ❤
+                    </div>
+                </div>
+            `;
+        }
+
+        // 处理生气选项
+        function handleAngry() {
+            alert('再给你一次机会！');
+            restart();
+        }
+
+        // 重新开始
+        function restart() {
+            document.getElementById('closePopup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
